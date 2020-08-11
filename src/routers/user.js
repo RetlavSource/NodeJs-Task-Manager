@@ -88,7 +88,7 @@ router.patch('/users/me', auth, async (req, res) => {
 // Delete the User
 router.delete('/users/me', auth, async (req, res) => {
     try {
-        req.user.remove();
+        await req.user.remove();
         sendCancelationEmail(req.user.email, req.user.name);    // Returns a promise, but no need to wait
         res.send(req.user);
     } catch (e) {

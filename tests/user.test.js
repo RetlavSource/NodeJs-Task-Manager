@@ -1,24 +1,9 @@
 const request = require('supertest');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const app = require('../src/app');
 const User =require('../src/models/user');
+const { userOneId, userOne, setupDatabase } =require('./fixtures/db');
 
-const userOneId = new mongoose.Types.ObjectId();
-const userOne = {
-    _id: userOneId,
-    name: 'Mister',
-    email: 'mister@example.com',
-    password: '35What?!',
-    tokens: [{
-        token: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET)
-    }]
-};
-
-beforeEach(async () => {
-    await User.deleteMany();
-    await new User(userOne).save();
-});
+beforeEach(setupDatabase);
 
 test('Should signup new user', async () => {
     const response = await request(app).post('/users').send({
@@ -127,3 +112,11 @@ test('Should not update invalid fields', async () => {
         })
         .expect(400);
 });
+
+
+// MORE User Test Ideas
+//
+// Should not signup user with invalid name/email/password
+// Should not update user if unauthenticated
+// Should not update user with invalid name/email/password
+// Should not delete user if unauthenticated

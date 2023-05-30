@@ -6,11 +6,14 @@ const { userOneId, userOne, setupDatabase } =require('./fixtures/db');
 beforeEach(setupDatabase);
 
 test('Should signup new user', async () => {
-    const response = await request(app).post('/users').send({
-        name: 'Valter',
-        email: 'valter@example.com',
-        password: 'MyPass777!'
-    }).expect(201);
+    const response = await request(app)
+        .post('/users')
+        .send({
+            name: 'Valter',
+            email: 'valter@example.com',
+            password: 'MyPass777!'
+        })
+        .expect(201);
 
     // Assert that the database was changed correctly
     const user = await User.findById(response.body.user._id);
@@ -30,10 +33,13 @@ test('Should signup new user', async () => {
 });
 
 test('Should login existing user', async () => {
-    const response = await request(app).post('/users/login').send({
-        email: userOne.email,
-        password: userOne.password
-    }).expect(200);
+    const response = await request(app)
+        .post('/users/login')
+        .send({
+            email: userOne.email,
+            password: userOne.password
+        })
+        .expect(200);
 
     const user = await User.findById(userOneId);
     expect(response.body.token).toBe(user.tokens[1].token);

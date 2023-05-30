@@ -3,7 +3,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
-const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account');
+const { sendWelcomeEmail, sendCancellationEmail } = require('../emails/account');
 const router = express.Router();
 
 // Create a User
@@ -76,7 +76,7 @@ router.patch('/users/me', auth, async (req, res) => {
         updates.forEach((update) => req.user[update] = req.body[update]);
         await req.user.save();
         
-        // this way, we can not access the meedleware from the model schema to hash the password before it is saved
+        // this way, we can not access the middleware from the model schema to hash the password before it is saved
         // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
 
         res.send(req.user);
@@ -89,7 +89,7 @@ router.patch('/users/me', auth, async (req, res) => {
 router.delete('/users/me', auth, async (req, res) => {
     try {
         await req.user.remove();
-        sendCancelationEmail(req.user.email, req.user.name);    // Returns a promise, but no need to wait
+        sendCancellationEmail(req.user.email, req.user.name);    // Returns a promise, but no need to wait
         res.send(req.user);
     } catch (e) {
         res.status(500).send();

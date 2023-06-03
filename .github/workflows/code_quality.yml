@@ -10,15 +10,30 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+#  build:
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        node: [14, 16, 18]
+#    name: Node ${{ matrix.node }} sample
+#    steps:
+#    - uses: actions/checkout@v3
+#    - name: Use Node.js ${{ matrix.node-version }}
+#      uses: actions/setup-node@v3
+#      with:
+#        node-version: ${{ matrix.node }}
+#    - run: npm install
+#    - run: npm run test-gitflow
+
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node: [14, 16, 18]
-    name: Node ${{ matrix.node }} sample
+    name: Node ${{ matrix.node }} tests
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Testing using Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node }}

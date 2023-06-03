@@ -7,9 +7,7 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches:
-      - main
-      - 'releases/*'
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -29,8 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: npm run test
     
   qodana:
     runs-on: ubuntu-latest

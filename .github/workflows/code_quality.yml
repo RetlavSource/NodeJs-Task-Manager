@@ -41,7 +41,7 @@ jobs:
         run: npm ci
 
       - name: Run Jest tests
-        run: npm run test
+        run: npm run test-gitflow
     
   qodana:
     runs-on: ubuntu-latest

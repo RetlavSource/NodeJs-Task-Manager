@@ -115,7 +115,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
     req.user.avatar = buffer;
     await req.user.save();
     res.send();
-}, (error, req, res, next) => {
+}, (error, req, res) => {
     res.status(400).send({ error: error.message });
 });
 
@@ -132,11 +132,11 @@ router.get('/users/:id/avatar', async (req, res) => {
         const user = await User.findById(req.params.id);
 
         if (!user || !user.avatar) {
-            throw new Error();
+            res.status(404).send();
+        } else {
+            res.set('Content-Type', 'image/png');
+            res.send(user.avatar);
         }
-
-        res.set('Content-Type', 'image/png');
-        res.send(user.avatar);
     } catch (e) {
         res.status(404).send();
     }

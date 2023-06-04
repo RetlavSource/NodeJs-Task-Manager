@@ -10,47 +10,47 @@ on:
     branches: [ "master" ]
 
 jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        node-version: [18.x]
-#    name: Node ${{ matrix.node-version }} tests
-#    steps:
-#    - uses: actions/checkout@v3
-#    - name: Tests using Node.js ${{ matrix.node-version }}
-#      uses: actions/setup-node@v3
-#      with:
-#        node-version: ${{ matrix.node-version }}
-#    - run: npm ci
-#      env:
-#        PORT: ${{ vars.PORT }}
-#        MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
-#        JWT_SECRET: ${{ secrets.JWT_SECRET }}
-#    - run: npm run test-gitflow
-
   build:
     runs-on: ubuntu-latest
-
-    name: Node 18.x tests
+    strategy:
+      matrix:
+        node-version: [18.x]
+    env:
+      PORT: ${{ vars.PORT }}
+      MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+    name: Node ${{ matrix.node-version }} tests
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - name: Tests using Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run test-gitflow
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Jest tests
-        env:
-          PORT: ${{ vars.PORT }}
-          MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        run: npm run test-gitflow
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    name: Node 18.x tests
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: '18.x'
+#
+#      - name: Install dependencies
+#        run: npm ci
+#
+#      - name: Run Jest tests
+#        env:
+#          PORT: ${{ vars.PORT }}
+#          MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
+#          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+#        run: npm run test-gitflow
     
   qodana:
     runs-on: ubuntu-latest

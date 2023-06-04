@@ -19,6 +19,10 @@ It is an API for creating, registering and login users, that can add tasks and m
 - Passwords are **safely hashed** using secure hash technology.
 - Can upload images as profile pictures for each user.
 
+---
+
+### Testing
+[![Task Manager CI/CD](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/code_quality.yml/badge.svg)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/code_quality.yml)
 
 ---
 

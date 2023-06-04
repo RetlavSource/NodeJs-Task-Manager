@@ -45,7 +45,7 @@ jobs:
           PORT: ${{ vars.PORT }}
           MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        run: npm run test-gitflow --detectOpenHandles
+        run: npm run test-gitflow
     
   qodana:
     runs-on: ubuntu-latest

@@ -1,3 +1,5 @@
+name: Qodana Code Analysis
+
 on:
   push:
     branches: [ "master" ]

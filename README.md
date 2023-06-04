@@ -22,7 +22,8 @@ It is an API for creating, registering and login users, that can add tasks and m
 ---
 
 ### Testing
-[![Task Manager CI/CD](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/code_quality.yml/badge.svg)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/code_quality.yml)
+[![Node.Js 18.x Tests](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Test%20Node.Js%2018.x.yml/badge.svg)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Test%20Node.Js%2018.x.yml)
+[![Qodana Code Analysis](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Qodana%20Analysis.yml/badge.svg)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Qodana%20Analysis.yml)
 
 ---
 

@@ -1,14 +1,44 @@
-name: Node.Js 18.x Tests
+name: Node.Js 16.x and 18.x Tests
 
 on:
   push:
     branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  PORT: ${{ vars.PORT }}
+  MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  test_node_16_x:
+    name: Node 16.x tests
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Jest tests
+        run: npm run test-gitflow
+
+  test_node_18_x:
+    if: ${{ always() }} # This job always runs, even if a previous job fails.
+    needs: test_node_16_x
     name: Node 18.x tests
+
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,8 +52,4 @@ jobs:
         run: npm ci
 
       - name: Run Jest tests
-        env:
-          PORT: ${{ vars.PORT }}
-          MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: npm run test-gitflow

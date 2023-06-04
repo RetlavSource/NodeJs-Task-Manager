@@ -41,6 +41,11 @@ jobs:
         run: npm ci
 
       - name: Run Jest tests
+        env:
+          PORT: ${{ secrets.PORT }}
+          SENDGRID_API_KEY: ${{ vars.SENDGRID_API_KEY }}
+          MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: npm run test-gitflow
     
   qodana:

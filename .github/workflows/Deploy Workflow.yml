@@ -1,0 +1,64 @@
+name: Deploy Workflow
+
+on:
+  push:
+    branches: [ "render-deploy" ]
+  pull_request:
+    branches: [ "render-deploy" ]
+
+env:
+  PORT: ${{ vars.PORT }}
+  MONGODB_URL: ${{ secrets.MONGODB_TEST_URL }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+
+jobs:
+
+  qodana_test:
+    name: Qodana Code Analysis
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@main
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+
+  test_node_18_x:
+    needs: qodana_test
+    name: Node 18.x tests
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Jest tests
+        run: npm run test-gitflow
+
+  deploy:
+    needs: test_node_18_x
+    name: Deploy to Render
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Render
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_TOKEN }}" \
+          -d '{"branch": "render-deploy"}' \
+          ${{ secrets.RENDER_WEBHOOK }}

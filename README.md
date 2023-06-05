@@ -22,11 +22,11 @@ It is an API for creating, registering and login users, that can add tasks and m
 ---
 
 ### Testing
-[![Node.Js 16.x and 18.x Tests ](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Test%20Node.Js%20Vesrions.yml/badge.svg?branch=master)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Test%20Node.Js%20Vesrions.yml)
+[![Node.Js 16.x and 18.x Tests](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Test%20Node.Js%20Vesrions.yml/badge.svg?branch=master)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Test%20Node.Js%20Vesrions.yml)
 <br>
-[![Qodana Code Analysis](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Qodana%20Analysis.yml/badge.svg?branch=master)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Qodana%20Analysis.yml)
+[![Qodana Analysis](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Qodana%20Analysis.yml/badge.svg?branch=master)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Qodana%20Analysis.yml)
 <br>
-[![Deployed To Render](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Deploy%20Workflow.yml/badge.svg?branch=render-deploy&event=deployment)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Deploy%20Workflow.yml)
+[![Deploy Render](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Deploy%20Workflow.yml/badge.svg?branch=render-deploy)](https://github.com/RetlavSource/NodeJs-Task-Manager/actions/workflows/Deploy%20Workflow.yml)
 
 ---
 
